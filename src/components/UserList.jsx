@@ -11,7 +11,7 @@ const UserList = () => {
     const currentUserToken = useSelector((state) => state.currentUser.token);
     const userList = useSelector((state) => state.userList.userList);
     const currentUserEmail = useSelector((state) => state.currentUser.email);
-    const isLoading = useSelector((state) => state.userList.isLoading); 
+    const [isLoading, setLoading] = useState(true);
     const navigate = useNavigate();
 
     const handleViewUser = (id) => {
@@ -44,6 +44,8 @@ const UserList = () => {
             } catch (error) {
                 console.error("Error - user list", error);
                 dispatch(setError(error.message));
+            } finally {
+                setLoading(false);
             }
         };
 
